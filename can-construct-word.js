@@ -1,3 +1,4 @@
+"use strict";
 // add whatever parameters you deem necessary & write doc comment
 /**takes in 2 strings
  * checks if second string has enough letters to build out first string 'word'
@@ -8,15 +9,22 @@
   // true
  */
 function canConstructWord(word, letters) {
-  let frequencyCounter = {}
-  for(let char of letters) {
-    let counter = frequencyCounter[char]||0;
-    frequencyCounter[char] = counter + 1;
+  function getFrequencyCounter(string) {
+    const frequencyCounter = {};
+
+    for(let char of string) {
+      let counter = frequencyCounter[char]||0;
+      frequencyCounter[char] = counter + 1;
+    }
+
+    return frequencyCounter;
   }
+
+  const frequencyCounter = getFrequencyCounter(letters);
 
   for(let char of word) {
     if(frequencyCounter[char] === undefined || frequencyCounter[char] === 0){
-      return false
+      return false;
     } else {
       frequencyCounter[char]--;
     }
